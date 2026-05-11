@@ -13,6 +13,15 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || '*'}));
 app.use(morgan('dev'));
 app.use(express.json());
 
+// rute
+app.use('/api/auth',            require('./routes/auth.routes'));
+app.use('/api/users',           require('./routes/users.routes'));
+app.use('/api/workers',         require('./routes/workers.routes'));
+app.use('/api/properties',      require('./routes/properties.routes'));
+app.use('/api/repair-requests', require('./routes/repairs.routes'));
+app.use('/api/reviews',         require('./routes/reviews.routes'));
+app.use('/api',                 require('./routes/lookup.routes'));
+
 app.get('/check', (req, res) => {
     res.json({ status: 'ok'});
 });
