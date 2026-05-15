@@ -26,7 +26,7 @@ app.use('/api/reviews',  require('./routes/reviews.routes'));
 app.use('/api/search', require('./routes/search.routes'));
 app.use('/api/upload', require('./routes/upload.routes'));
 app.use('/api', require('./routes/lookup.routes'));
-
+app.use('/api/admin', require('./routes/admin.routes'));
 
 app.get('/check', (req, res) => {
     res.json({ status: 'ok'});
