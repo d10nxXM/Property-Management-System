@@ -5,71 +5,52 @@ const Sidebar = () => {
   const { isOwner, isWorker, isAdmin } = useAuth();
 
   const linkClass = ({ isActive }) =>
-    `flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
+    `block px-4 py-2.5 text-sm transition-colors border-l-2 ${
       isActive
-        ? 'bg-blue-600 text-white'
-        : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+        ? 'border-white text-white light:border-black light:text-black font-medium'
+        : 'border-transparent text-muted-light hover:text-white light:hover:text-black hover:border-border'
     }`;
 
   return (
-    <aside className="w-64 min-h-screen bg-white shadow-md p-4 flex flex-col gap-2">
-      <p className="text-xs text-gray-400 uppercase font-semibold px-4 mb-2">
-        Menu
-      </p>
+    <aside className="w-56 min-h-screen border-r border-border pt-8">
+      <div className="px-4 mb-6">
+        <p className="section-label">Navigation</p>
+      </div>
 
-      {/* Svi ulogovani */}
-      <NavLink to="/dashboard" className={linkClass}>
-        🏠 Dashboard
-      </NavLink>
+      <nav className="flex flex-col gap-0.5">
+        <NavLink to="/dashboard" className={linkClass}>Dashboard</NavLink>
+        <NavLink to="/profile"   className={linkClass}>My Profile</NavLink>
 
-      <NavLink to="/profile" className={linkClass}>
-        👤 My Profile
-      </NavLink>
+        {isOwner && (
+          <>
+            <div className="px-4 pt-6 pb-2">
+              <p className="section-label">Owner</p>
+            </div>
+            <NavLink to="/properties" className={linkClass}>Properties</NavLink>
+            <NavLink to="/repairs"    className={linkClass}>Repair Requests</NavLink>
+          </>
+        )}
 
-      {/* Owner only */}
-      {isOwner && (
-        <>
-          <p className="text-xs text-gray-400 uppercase font-semibold px-4 mt-4 mb-2">
-            Owner
-          </p>
-          <NavLink to="/properties" className={linkClass}>
-            🏢 My Properties
-          </NavLink>
-          <NavLink to="/repairs" className={linkClass}>
-            🔧 Repair Requests
-          </NavLink>
-        </>
-      )}
+        {isWorker && (
+          <>
+            <div className="px-4 pt-6 pb-2">
+              <p className="section-label">Worker</p>
+            </div>
+            <NavLink to="/repairs" className={linkClass}>Browse Repairs</NavLink>
+            <NavLink to="/workers" className={linkClass}>Workers</NavLink>
+          </>
+        )}
 
-      {/* Worker only */}
-      {isWorker && (
-        <>
-          <p className="text-xs text-gray-400 uppercase font-semibold px-4 mt-4 mb-2">
-            Worker
-          </p>
-          <NavLink to="/repairs" className={linkClass}>
-            🔧 Browse Repairs
-          </NavLink>
-          <NavLink to="/workers" className={linkClass}>
-            👷 Workers
-          </NavLink>
-        </>
-      )}
-
-      {/* Admin only */}
-      {isAdmin && (
-        <>
-          <p className="text-xs text-gray-400 uppercase font-semibold px-4 mt-4 mb-2">
-            Admin
-          </p>
-          <NavLink to="/admin" className={linkClass}>
-            ⚙️ Admin Panel
-          </NavLink>
-          <NavLink to="/workers" className={linkClass}>
-            👷 Workers
-          </NavLink>
-        </>
-      )}
+        {isAdmin && (
+          <>
+            <div className="px-4 pt-6 pb-2">
+              <p className="section-label">Admin</p>
+            </div>
+            <NavLink to="/admin"   className={linkClass}>Admin Panel</NavLink>
+            <NavLink to="/workers" className={linkClass}>Workers</NavLink>
+          </>
+        )}
+      </nav>
     </aside>
   );
 };

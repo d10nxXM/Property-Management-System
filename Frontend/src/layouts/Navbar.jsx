@@ -13,56 +13,47 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark px-6 py-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
-          Prop<span className="text-primary">Manager</span>
+    <header className="border-b border-border light:border-border-light">
+      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link to="/" className="text-sm font-semibold tracking-tight text-white light:text-black">
+          PropManager
         </Link>
 
-        {/* Right side */}
-        <div className="flex items-center gap-3">
-          {/* Dark mode toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          >
-            {isDark ? 'Light' : 'Dark'}
-          </button>
-
+        <div className="flex items-center gap-1">
+          
           {!isAuthenticated ? (
             <>
-              <Link to="/login" className="btn-secondary text-sm">
-                Login
+              <Link to="/login" className="btn-ghost text-xs px-4 py-2">
+                Sign in
               </Link>
-              <Link to="/register" className="btn-primary text-sm">
-                Sign Up
+              <Link to="/register" className="btn-primary text-xs px-4 py-2 ml-1">
+                Get started
               </Link>
             </>
           ) : (
             <>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-semibold">
+              <div className="flex items-center gap-3 mr-3">
+                <div className="w-7 h-7 bg-accent text-black flex items-center justify-center text-xs font-bold">
                   {user?.first_name?.[0]}{user?.last_name?.[0]}
                 </div>
-                <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                <div>
+                  <p className="text-xs font-medium text-white light:text-black leading-none">
                     {user?.first_name} {user?.last_name}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{user?.role}</p>
+                  <p className="text-xs text-muted-light mt-0.5">{user?.role}</p>
                 </div>
               </div>
-              <Link to="/dashboard" className="btn-secondary text-sm">
+              <Link to="/dashboard" className="btn-ghost text-xs px-4 py-2">
                 Dashboard
               </Link>
-              <button onClick={handleLogout} className="btn-danger text-sm">
-                Logout
+              <button onClick={handleLogout} className="btn-danger text-xs px-4 py-2 ml-1">
+                Sign out
               </button>
             </>
           )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 

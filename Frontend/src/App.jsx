@@ -52,10 +52,10 @@ function App() {
           </ProtectedRoute>
         }/>
 
-        {/* Owner only */}
-        <Route path="/properties" element={
+       {/* Owner only */}
+        <Route path="/properties/create" element={
           <ProtectedRoute roles={['PropertyOwner']}>
-            <PropertiesPage />
+            <CreatePropertyPage />
           </ProtectedRoute>
         }/>
 
@@ -65,9 +65,9 @@ function App() {
           </ProtectedRoute>
         }/>
 
-        <Route path="/properties/create" element={
+        <Route path="/properties" element={
           <ProtectedRoute roles={['PropertyOwner']}>
-            <CreatePropertyPage />
+            <PropertiesPage />
           </ProtectedRoute>
         }/>
 
